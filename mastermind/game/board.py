@@ -57,14 +57,14 @@ class Board:
         text += "\n--------------------"
         return text
 
-    def _prepare(self):
-        """Sets up the board with a random number of piles containing a random 
-        number of stones.
+    def _prepare(self, player):
+        """Sets up the board with an entry for each player.
         
         Args:
             self (Board): an instance of Board.
         """
-        piles = random.randint(2, 5) 
-        for n in range(piles):
-            stones = random.randint(1, 9)
-            self._piles.append(stones)
+        name = player.get_name(self)
+        code = str(random.randint(1000, 10000))
+        guess = "----"
+        hint = "****"
+        self._items[name] = [code, guess, hint]
