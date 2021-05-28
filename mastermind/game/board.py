@@ -1,4 +1,5 @@
 import random
+from game.player import Player
 
 class Board:
     """A designated playing surface. The responsibility of Board is to keep track of the pieces in play.
@@ -15,8 +16,9 @@ class Board:
         Args:
             self (Board): an instance of Board.
         """
-        self._piles = []
-        self._prepare()
+        player = Player()
+        self._items = []
+        self._prepare(player)
 
     def apply(self, move):
         """Applies the given move to the playing surface. In this case, that 
@@ -26,11 +28,11 @@ class Board:
             self (Board): an instance of Board.
             move (Move): The move to apply.
         """
-        pile = move.get_pile()
+        row = move.get_row()
         stones = move.get_stones()
         self._piles[pile] = max(0, self._piles[pile] - stones)
     
-    def is_empty(self):
+    def has_won(self, hint):
         """Determines if all the stones have been removed from the board.
         
         Args:
@@ -39,8 +41,7 @@ class Board:
         Returns:
             boolean: True if the board has no stones on it; false if otherwise.
         """
-        empty = [0] * len(self._piles)
-        return self._piles == empty
+        return hint == "xxxx"
 
     def to_string(self):
         """Converts the board data to its string representation.
@@ -52,8 +53,8 @@ class Board:
             string: A representation of the current board.
         """ 
         text =  "\n--------------------"
-        for pile, stones in enumerate(self._piles):
-            text += (f"\n{pile}: " + "O " * stones)
+        text += "\nPlayer " + self._items[0] + ": " + self._items[0][1] + ", " + self._items[0][2]
+        text += "\nPlayer " + self._items[1] + ": " + self._items[1][1] + ", " + self._items[1][2]
         text += "\n--------------------"
         return text
 
@@ -63,7 +64,7 @@ class Board:
         Args:
             self (Board): an instance of Board.
         """
-        name = player.get_name(self)
+        name = player.get_name()
         code = str(random.randint(1000, 10000))
         guess = "----"
         hint = "****"
