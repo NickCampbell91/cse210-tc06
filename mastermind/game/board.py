@@ -16,9 +16,9 @@ class Board:
         Args:
             self (Board): an instance of Board.
         """
-        player = Player()
-        self._items = []
-        self._prepare(player)
+
+        self._items = {} 
+        self._prepare()
 
     def apply(self, move):
         """Applies the given move to the playing surface. In this case, that 
@@ -53,8 +53,8 @@ class Board:
             string: A representation of the current board.
         """ 
         text =  "\n--------------------"
-        text += "\nPlayer " + self._items[0] + ": " + self._items[0][1] + ", " + self._items[0][2]
-        text += "\nPlayer " + self._items[1] + ": " + self._items[1][1] + ", " + self._items[1][2]
+        for x, y in self._items.items():
+            text += (f"\nPlayer " + x + ": " + y[1] + ", " + y[2])
         text += "\n--------------------"
         return text
 
