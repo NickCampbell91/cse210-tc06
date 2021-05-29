@@ -1,37 +1,27 @@
 class Move:
-    """A maneuver in the game. The responsibility of Move is to keep track of the stones to remove and which pile to remove them from.
+    """A maneuver in the game. The responsibility of Move is to keep track of the digits from the user and check if they are the given number.
     
     Stereotype: 
         Information Holder
 
     Attributes:
-        _pile (integer): The pile to remove from.
-        _stones (integer): The number of stones to remove.
+        _digits (integer): The digits to remove from.
     """
-    def __init__(self, stones, pile):
+    def __init__(self, digits):
         """The class constructor.
         
         Args:
             self (Board): an instance of Board.
         """
-        self._pile = pile
-        self._stones = stones
+        self._digits = digits
 
-    def get_pile(self):
-        """Returns the pile to remove from.
-
-        Args:
-            self (Move): an instance of Move.
-        """
-        return self._pile
-
-    def get_stones(self):
-        """Returns the number of stones to remove.
+    def get_digits(self):
+        """Returns the digits to remove from.
 
         Args:
             self (Move): an instance of Move.
         """
-        return self._stones
+        return self._digits
 
     def _create_hint(self, code, guess):
         """Generates a hint based on the given code and guess.
