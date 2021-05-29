@@ -50,7 +50,7 @@ class Director:
             self (Director): An instance of Director.
         """
         for n in range(2):
-            name = self._console.read(f"Enter a name for player {n + 1}: ")
+            name = self._console.read(f"Enter a name for player {n + 1}: ") # call the prepare function from board out to director - remove underscore from "_prepare" hence unprivatize
             player = Player(name)
             self._roster.add_player(player)
     
@@ -67,8 +67,8 @@ class Director:
         # get next player's move
         player = self._roster.get_current()
         self._console.write(f"{player.get_name()}'s turn:")
-        pile = self._console.read_number("What pile to remove from? ")
-        stones = self._console.read_number("How many stones to remove? ")
+        pile = self._console.read_number("What pile to remove from? ")  # read user input
+        stones = self._console.read_number("How many stones to remove? ") # no need?
         move = Move(stones, pile)
         player.set_move(move)
 
@@ -96,6 +96,3 @@ class Director:
             print(f"\n{name} won!")
             self._keep_playing = False
         self._roster.next_player()
-
-     
-       
