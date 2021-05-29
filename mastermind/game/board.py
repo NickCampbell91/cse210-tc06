@@ -59,7 +59,7 @@ class Board:
         text += "\n--------------------"
         return text
 
-    def _prepare(self, player):
+    def prepare(self, player):
         """Sets up the board with an entry for each player.
         
         Args:
