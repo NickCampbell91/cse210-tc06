@@ -1,5 +1,6 @@
 import random
 from game.player import Player
+from game.move import Move
 
 class Board:
     """A designated playing surface. The responsibility of Board is to keep track of the pieces in play.
