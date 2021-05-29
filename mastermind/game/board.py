@@ -19,9 +19,10 @@ class Board:
         """
 
         self._items = {} 
-        self._prepare()
+        #self._prepare()
+        #self.player = Player()
 
-    def apply(self, move):
+    def apply(self, move, player):
         """Applies the given move to the playing surface. In this case, that 
         means removing a number of stones from a pile.
         
@@ -29,9 +30,8 @@ class Board:
             self (Board): an instance of Board.
             move (Move): The move to apply.
         """
-        row = move.get_row()
-        stones = move.get_stones()
-        self._piles[pile] = max(0, self._piles[pile] - stones)
+        name = player.get_name()
+        self._items[name][1] = move
     
     def has_won(self, hint):
         """Determines if all the stones have been removed from the board.
