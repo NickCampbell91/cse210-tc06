@@ -49,11 +49,13 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        for n in range(2):
+        num_players = int(input("Number of players: "))
+        for n in range(num_players):
             name = self._console.read(f"Enter a name for player {n + 1}: ") # call the prepare function from board out to director - remove underscore from "_prepare" hence unprivatize
             player = Player(name)
             self._roster.add_player(player)
             self._board.prepare(player)
+        self._roster.next_player()
     
     def _get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
@@ -86,13 +88,13 @@ class Director:
  
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
-        this case, that means checking if there are stones left and declaring the winner.
+        this case, that means checking if the hint = "xxxx".
 
         Args:
             self (Director): An instance of Director.
         """
-        
-        if self._board.has_won(hint):
+        player = self._roster.get_current()
+        if self._board.has_won(player):
             winner = self._roster.get_current()
             name = winner.get_name()
             print(f"\n{name} won!")

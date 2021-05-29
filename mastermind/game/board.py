@@ -9,7 +9,7 @@ class Board:
         Information Holder
 
     Attributes:
-        _piles (list): The number of piles of stones.
+        _items (dictionary of lists): The code, guess, and hint
     """
     def __init__(self):
         """The class constructor.
@@ -19,31 +19,32 @@ class Board:
         """
 
         self._items = {} 
-        #self._prepare()
-        #self.player = Player()
 
     def apply(self, move, player):
         """Applies the given move to the playing surface. In this case, that 
-        means removing a number of stones from a pile.
+        means updating the current guess of a player.
         
         Args:
             self (Board): an instance of Board.
             move (Move): The move to apply.
+            player (Player): The player who made the guess.
         """
         name = player.get_name()
         guess = move.get_digits()
         self._items[name][1] = str(guess)
     
-    def has_won(self, hint):
-        """Determines if all the stones have been removed from the board.
+    def has_won(self, player):
+        """Determines if the guess equals the code.
         
         Args:
             self (Board): an instance of Board.
+            player (Player): The player who made the guess.
 
         Returns:
-            boolean: True if the board has no stones on it; false if otherwise.
+            boolean: True if the hint has all xs.
         """
-        return hint == "xxxx"
+        name = player.get_name()
+        return self._items[name][2] == "xxxx"
 
     def to_string(self):
         """Converts the board data to its string representation.
@@ -65,24 +66,23 @@ class Board:
         
         Args:
             self (Board): an instance of Board.
+            player (Player): The player who made the guess.
         """
         name = player.get_name()
         code = str(random.randint(1000, 10000))
         guess = "----"
         hint = "****"
         self._items[name] = [code, guess, hint]
-        print()
+        #print()
 
     def _create_hint(self, move, player):
         """Generates a hint based on the given code and guess.
 
         Args:
             self (Board): An instance of Board.
-            code (string): The code to compare with.
-            guess (string): The guess that was made.
+            player (Player): The player who made the guess.
+            move (Move): The current guess.
 
-        Returns:
-            string: A hint in the form [xxxx]
         """ 
         name = player.get_name()
         guess = str(move.get_digits())
