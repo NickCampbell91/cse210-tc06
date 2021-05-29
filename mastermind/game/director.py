@@ -53,7 +53,7 @@ class Director:
             name = self._console.read(f"Enter a name for player {n + 1}: ") # call the prepare function from board out to director - remove underscore from "_prepare" hence unprivatize
             player = Player(name)
             self._roster.add_player(player)
-        self._board.prepare(player)
+            self._board.prepare(player)
     
     def _get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
@@ -82,6 +82,7 @@ class Director:
         player = self._roster.get_current()
         move = player.get_move()
         self._board.apply(move, player)
+        self._board._create_hint(move, player)
  
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -90,7 +91,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        hint = "yoyo"
+        
         if self._board.has_won(hint):
             winner = self._roster.get_current()
             name = winner.get_name()

@@ -31,7 +31,8 @@ class Board:
             move (Move): The move to apply.
         """
         name = player.get_name()
-        self._items[name][1] = move
+        guess = move.get_digits()
+        self._items[name][1] = str(guess)
     
     def has_won(self, hint):
         """Determines if all the stones have been removed from the board.
@@ -70,8 +71,9 @@ class Board:
         guess = "----"
         hint = "****"
         self._items[name] = [code, guess, hint]
+        print()
 
-    def _create_hint(self, code, guess):
+    def _create_hint(self, move, player):
         """Generates a hint based on the given code and guess.
 
         Args:
@@ -82,6 +84,9 @@ class Board:
         Returns:
             string: A hint in the form [xxxx]
         """ 
+        name = player.get_name()
+        guess = str(move.get_digits())
+        code = self._items[name][0]
         hint = ""
         for index, letter in enumerate(guess):
             if code[index] == letter:
@@ -90,4 +95,5 @@ class Board:
                 hint += "o"
             else:
                 hint += "*"
-        return hint
+        
+        self._items[name][2] = hint
