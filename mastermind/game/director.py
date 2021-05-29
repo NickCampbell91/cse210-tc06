@@ -90,12 +90,9 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        if self._board.is_empty():
+        if self._board.has_won(hint):
             winner = self._roster.get_current()
             name = winner.get_name()
             print(f"\n{name} won!")
             self._keep_playing = False
         self._roster.next_player()
-
-     
-       
